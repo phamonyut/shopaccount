@@ -37,6 +37,8 @@ gem 'ransack'
 gem 'will_paginate', '~> 3.0.6'
 gem 'bootstrap-sass', '~> 3.3.4'
 gem "font-awesome-rails"
+gem "mini_magick"
+gem "refile", require: ["refile/rails", "refile/image_processing"]
 
 
 group :development, :test do

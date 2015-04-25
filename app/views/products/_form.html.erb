@@ -27,6 +27,10 @@
     <%= f.label :count %><br>
     <%= f.number_field :count, class: 'form-control' %>
   </div>
+  <div class="form-group">
+    <%= f.label :image %><br>
+    <%= f.attachment_field :image %>
+  </div>
   <div class="actions">
     <%= f.submit 'submit', class: 'btn btn-default' %>
   </div>

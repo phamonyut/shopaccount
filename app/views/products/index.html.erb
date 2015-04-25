@@ -35,7 +35,12 @@
       <tbody>
         <% @products.each do |product| %>
           <tr>
-            <td><%= link_to product.title, product %></td>
+            <td>
+              <% if product.image %>
+                <%= image_tag attachment_url(product, :image) %>
+              <% end %>
+              <%= link_to product.title, product %>
+            </td>
             <td><%= product.price %></td>
             <td><%= product.count %></td>
             <td>
