@@ -1,35 +1,78 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <div class="row">
 
-<h1>Listing Products</h1>
+    <p id="notice"><%= notice %></p>
 
-<table border="1">
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Price</th>
-      <th>Count</th>
-      <th colspan="5"></th>
-    </tr>
-  </thead>
+    <h1>
+      Listing Products
+      <div class="pull-right">
+        <%= link_to 'New Product', new_product_path, class: 'btn btn-primary' %>
+      </div>
+    </h1>
 
-  <tbody>
-    <% @products.each do |product| %>
-      <tr>
-        <td><%= product.title %></td>
-        <td><%= product.description %></td>
-        <td><%= product.price %></td>
-        <td><%= product.count %></td>
-        <td><%= link_to 'Increase', product_increase_path(product) %></td>
-        <td><%= link_to 'Decrease', product_decrease_path(product) %></td>
-        <td><%= link_to 'Show', product %></td>
-        <td><%= link_to 'Edit', edit_product_path(product) %></td>
-        <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+    <%= search_form_for @q, html: {class: 'form-inline'} do |f| %>
+      <div class="form-group">
+        <%= f.label :title_cont %>
+        <%= f.search_field :title_cont, class: 'form-control' %>  
+      </div>
+      <div class="form-group">
+        <%= f.label :description_cont %>
+        <%= f.search_field :description_cont, class: 'form-control' %>
+      </div>
+      <%= f.submit 'search', class: 'btn btn-default' %>
     <% end %>
-  </tbody>
-</table>
 
-<br>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Price</th>
+          <th>Count</th>
+          <th> &nbsp; </th>
+        </tr>
+      </thead>
 
-<%= link_to 'New Product', new_product_path %>
+      <tbody>
+        <% @products.each do |product| %>
+          <tr>
+            <td><%= link_to product.title, product %></td>
+            <td><%= product.price %></td>
+            <td><%= product.count %></td>
+            <td>
+              <%= link_to product_increase_path(product), class: 'btn btn-default' do %>
+                <i class="fa fa-plus-circle"></i>
+              <% end %>
+              <%= link_to product_decrease_path(product), class: 'btn btn-default' do %>
+                <i class="fa fa-minus-circle"></i>
+              <% end %>
+              <button type="button" data-toggle="modal" data-target="#descModal" class="btn btn-default">
+                <i class="fa fa-connectdevelop"></i>
+              </button>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <br>
+
+    <%= will_paginate @products %>
+  </div>
+</div>
+
+<div class="modal fade" id="descModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Product Description</h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

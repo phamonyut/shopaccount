@@ -8,6 +8,25 @@
 </head>
 <body>
 
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+      <ul class="nav navbar-nav navbar-right">
+        <% if user_signed_in? %>
+          <li>
+            <a href="#">
+              signin as <%= current_user.email %>
+            </a>
+          </li>
+          <li>
+            <%= link_to 'logout', destroy_user_session_path, method: :delete %>  
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
 <%= yield %>
 
 </body>
