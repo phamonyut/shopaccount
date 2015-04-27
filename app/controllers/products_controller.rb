@@ -2,12 +2,16 @@ class ProductsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_product, only: [:show, :edit, :update, :destroy]
 
+  def test
+    title = params[:title]
+    puts "title: #{title}"
+  end
+
   # GET /products
   # GET /products.json
   def index
     @q        = Product.ransack(params[:q])
     @products = @q.result(distinct: true).paginate(:page => params[:page])
-    # @products = Product.paginate(:page => params[:page])
   end
 
   # GET /products/1
